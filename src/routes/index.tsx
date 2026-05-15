@@ -12,11 +12,18 @@ import {
   Wifi,
   Phone,
   Mail,
-  Globe,
   Quote,
   Menu,
   X,
   Check,
+  Sun,
+  Moon,
+  MapPin,
+  Sparkles,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
 } from "lucide-react";
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
@@ -32,6 +39,42 @@ const NAV = [
   { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact" },
 ];
+
+function useTheme() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  useEffect(() => {
+    const saved = (typeof window !== "undefined" && localStorage.getItem("urbtech-theme")) as
+      | "dark"
+      | "light"
+      | null;
+    if (saved) setTheme(saved);
+  }, []);
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("light", theme === "light");
+    root.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("urbtech-theme", theme);
+  }, [theme]);
+  return { theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) };
+}
+
+function ThemeToggle({ theme, toggle }: { theme: "dark" | "light"; toggle: () => void }) {
+  return (
+    <button
+      onClick={toggle}
+      aria-label="Toggle theme"
+      className="relative inline-flex h-9 w-16 items-center rounded-full border border-hairline bg-surface-2 transition-colors hover:border-primary/50"
+    >
+      <span
+        className={`absolute top-1 left-1 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 ${
+          theme === "light" ? "translate-x-7" : "translate-x-0"
+        }`}
+      >
+        {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+      </span>
+    </button>
+  );
+}
 
 function useScrollSpy() {
   const [active, setActive] = useState("hero");
@@ -84,8 +127,9 @@ function Logo() {
 function Navbar() {
   const active = useScrollSpy();
   const [open, setOpen] = useState(false);
+  const { theme, toggle } = useTheme();
   return (
-    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-white/[0.06]">
+    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-hairline">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Logo />
         <ul className="hidden items-center gap-8 lg:flex">
@@ -93,31 +137,37 @@ function Navbar() {
             <li key={n.id}>
               <a
                 href={`#${n.id}`}
-                className={`font-cond text-sm uppercase tracking-[0.18em] transition-colors ${
+                className={`relative font-cond text-sm uppercase tracking-[0.18em] transition-colors after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:bg-primary after:transition-all ${
                   active === n.id ? "text-primary" : "text-foreground/70 hover:text-foreground"
-                }`}
+                } ${active === n.id ? "after:w-full" : "after:w-0 hover:after:w-full"}`}
               >
                 {n.label}
               </a>
             </li>
           ))}
         </ul>
-        <a
-          href="#contact"
-          className="hidden lg:inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-cond text-sm uppercase tracking-widest text-primary-foreground transition-transform hover:scale-105"
-        >
-          Get Free ATM <ArrowRight className="h-4 w-4" />
-        </a>
-        <button
-          aria-label="Toggle menu"
-          onClick={() => setOpen((o) => !o)}
-          className="lg:hidden p-2 text-foreground"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="hidden lg:flex items-center gap-4">
+          <ThemeToggle theme={theme} toggle={toggle} />
+          <a
+            href="#contact"
+            className="shine inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-cond text-sm uppercase tracking-widest text-primary-foreground transition-transform hover:scale-105"
+          >
+            Get Free ATM <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+        <div className="flex items-center gap-3 lg:hidden">
+          <ThemeToggle theme={theme} toggle={toggle} />
+          <button
+            aria-label="Toggle menu"
+            onClick={() => setOpen((o) => !o)}
+            className="p-2 text-foreground"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
       {open && (
-        <div className="lg:hidden border-t border-white/[0.06] px-6 py-6 bg-background/95">
+        <div className="lg:hidden border-t border-hairline px-6 py-6 bg-background/95">
           <ul className="flex flex-col gap-4">
             {NAV.map((n) => (
               <li key={n.id}>
