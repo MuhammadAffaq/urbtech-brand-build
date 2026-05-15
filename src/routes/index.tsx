@@ -52,7 +52,6 @@ function useTheme() {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("light", theme === "light");
-    root.classList.toggle("dark", theme === "dark");
     localStorage.setItem("urbtech-theme", theme);
   }, [theme]);
   return { theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) };
