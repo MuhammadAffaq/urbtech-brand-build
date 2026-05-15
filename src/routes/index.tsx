@@ -12,11 +12,18 @@ import {
   Wifi,
   Phone,
   Mail,
-  Globe,
   Quote,
   Menu,
   X,
   Check,
+  Sun,
+  Moon,
+  MapPin,
+  Sparkles,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
 } from "lucide-react";
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
@@ -32,6 +39,41 @@ const NAV = [
   { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact" },
 ];
+
+function useTheme() {
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  useEffect(() => {
+    const saved = (typeof window !== "undefined" && localStorage.getItem("urbtech-theme")) as
+      | "dark"
+      | "light"
+      | null;
+    if (saved) setTheme(saved);
+  }, []);
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("light", theme === "light");
+    localStorage.setItem("urbtech-theme", theme);
+  }, [theme]);
+  return { theme, toggle: () => setTheme((t) => (t === "dark" ? "light" : "dark")) };
+}
+
+function ThemeToggle({ theme, toggle }: { theme: "dark" | "light"; toggle: () => void }) {
+  return (
+    <button
+      onClick={toggle}
+      aria-label="Toggle theme"
+      className="relative inline-flex h-9 w-16 items-center rounded-full border border-hairline bg-surface-2 transition-colors hover:border-primary/50"
+    >
+      <span
+        className={`absolute top-1 left-1 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg transition-transform duration-300 ${
+          theme === "light" ? "translate-x-7" : "translate-x-0"
+        }`}
+      >
+        {theme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+      </span>
+    </button>
+  );
+}
 
 function useScrollSpy() {
   const [active, setActive] = useState("hero");
@@ -84,8 +126,9 @@ function Logo() {
 function Navbar() {
   const active = useScrollSpy();
   const [open, setOpen] = useState(false);
+  const { theme, toggle } = useTheme();
   return (
-    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-white/[0.06]">
+    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-hairline">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Logo />
         <ul className="hidden items-center gap-8 lg:flex">
@@ -93,31 +136,37 @@ function Navbar() {
             <li key={n.id}>
               <a
                 href={`#${n.id}`}
-                className={`font-cond text-sm uppercase tracking-[0.18em] transition-colors ${
+                className={`relative font-cond text-sm uppercase tracking-[0.18em] transition-colors after:absolute after:left-0 after:-bottom-1.5 after:h-[2px] after:bg-primary after:transition-all ${
                   active === n.id ? "text-primary" : "text-foreground/70 hover:text-foreground"
-                }`}
+                } ${active === n.id ? "after:w-full" : "after:w-0 hover:after:w-full"}`}
               >
                 {n.label}
               </a>
             </li>
           ))}
         </ul>
-        <a
-          href="#contact"
-          className="hidden lg:inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-cond text-sm uppercase tracking-widest text-primary-foreground transition-transform hover:scale-105"
-        >
-          Get Free ATM <ArrowRight className="h-4 w-4" />
-        </a>
-        <button
-          aria-label="Toggle menu"
-          onClick={() => setOpen((o) => !o)}
-          className="lg:hidden p-2 text-foreground"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="hidden lg:flex items-center gap-4">
+          <ThemeToggle theme={theme} toggle={toggle} />
+          <a
+            href="#contact"
+            className="shine inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-cond text-sm uppercase tracking-widest text-primary-foreground transition-transform hover:scale-105"
+          >
+            Get Free ATM <ArrowRight className="h-4 w-4" />
+          </a>
+        </div>
+        <div className="flex items-center gap-3 lg:hidden">
+          <ThemeToggle theme={theme} toggle={toggle} />
+          <button
+            aria-label="Toggle menu"
+            onClick={() => setOpen((o) => !o)}
+            className="p-2 text-foreground"
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </nav>
       {open && (
-        <div className="lg:hidden border-t border-white/[0.06] px-6 py-6 bg-background/95">
+        <div className="lg:hidden border-t border-hairline px-6 py-6 bg-background/95">
           <ul className="flex flex-col gap-4">
             {NAV.map((n) => (
               <li key={n.id}>
@@ -231,7 +280,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="relative py-28 bg-[#0f0f0f]">
+    <section id="about" className="relative py-28 bg-surface">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="reveal">
@@ -299,7 +348,7 @@ const SERVICES = [
 
 function Services() {
   return (
-    <section id="services" className="relative py-28 bg-[#111111]">
+    <section id="services" className="relative py-28 bg-surface-2">
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="reveal max-w-2xl">
@@ -341,7 +390,7 @@ const TERMINAL_FEATURES = [
 
 function Terminals() {
   return (
-    <section id="terminals" className="relative py-28 bg-[#0f0f0f]">
+    <section id="terminals" className="relative py-28 bg-surface">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-16">
           <div>
@@ -427,7 +476,7 @@ const HIGHLIGHTS = [
 
 function AboutUs() {
   return (
-    <section className="relative py-28 bg-[#111111]">
+    <section className="relative py-28 bg-surface-2">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="reveal">
@@ -492,7 +541,7 @@ const TESTIMONIALS = [
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-28 bg-[#0f0f0f]">
+    <section id="testimonials" className="relative py-28 bg-surface">
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="reveal max-w-2xl">
@@ -522,7 +571,7 @@ function Testimonials() {
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
   return (
-    <section id="contact" className="relative py-28 bg-[#111111] overflow-hidden">
+    <section id="contact" className="relative py-28 bg-surface-2 overflow-hidden">
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] red-glow pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-16">
@@ -541,7 +590,6 @@ function Contact() {
               {[
                 { icon: Phone, label: "Call Us", value: "(405) 210-6451" },
                 { icon: Mail, label: "Email", value: "urbtechsolutions@outlook.com" },
-                { icon: Globe, label: "Website", value: "www.urbtechatms.com" },
               ].map((c) => (
                 <div
                   key={c.label}
@@ -612,16 +660,125 @@ function Contact() {
   );
 }
 
+const MARQUEE = [
+  "Free Installation",
+  "Zero Cost",
+  "Earn Per Transaction",
+  "Nationwide Coverage",
+  "Trusted Since 2018",
+  "24/7 Monitoring",
+  "Local Technicians",
+  "Cashless Terminals",
+];
+
+function Marquee() {
+  return (
+    <div className="relative border-y border-hairline bg-background overflow-hidden py-6">
+      <div className="flex w-max animate-marquee gap-12 whitespace-nowrap">
+        {[...MARQUEE, ...MARQUEE].map((m, i) => (
+          <div key={i} className="flex items-center gap-12">
+            <Sparkles className="h-5 w-5 text-primary" />
+            <span className="font-display text-2xl tracking-wider text-foreground/80">{m}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function Footer() {
   return (
-    <footer className="border-t border-white/[0.06] bg-[#080808] py-8">
-      <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-        <Logo />
-        <div className="text-muted-foreground font-cond uppercase tracking-widest text-xs">
-          © {new Date().getFullYear()} URBTECH. All rights reserved.
+    <footer className="relative bg-background border-t border-hairline overflow-hidden">
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[400px] w-[800px] red-glow pointer-events-none opacity-60" />
+      <div className="relative mx-auto max-w-7xl px-6 py-16">
+        <div className="grid lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] gap-12">
+          <div>
+            <Logo />
+            <p className="mt-5 max-w-xs text-sm text-muted-foreground leading-relaxed">
+              Free ATM placements & cashless payment terminals for ambitious businesses.
+              Trusted by partners nationwide since 2018.
+            </p>
+            <div className="mt-6 flex gap-3">
+              {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  aria-label="Social link"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-foreground/70 hover:text-primary hover:border-primary hover:-translate-y-0.5 transition-all"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="font-cond text-xs uppercase tracking-[0.3em] text-primary mb-5">
+              Explore
+            </div>
+            <ul className="space-y-3 text-sm">
+              {NAV.map((n) => (
+                <li key={n.id}>
+                  <a
+                    href={`#${n.id}`}
+                    className="text-foreground/70 hover:text-primary transition-colors"
+                  >
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <div className="font-cond text-xs uppercase tracking-[0.3em] text-primary mb-5">
+              Services
+            </div>
+            <ul className="space-y-3 text-sm text-foreground/70">
+              <li>Free ATM Placement</li>
+              <li>Cashless Terminals</li>
+              <li>24/7 Monitoring</li>
+              <li>Cash Loading</li>
+              <li>Compliance & Insurance</li>
+            </ul>
+          </div>
+
+          <div>
+            <div className="font-cond text-xs uppercase tracking-[0.3em] text-primary mb-5">
+              Get In Touch
+            </div>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3 text-foreground/80">
+                <Phone className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                (405) 210-6451
+              </li>
+              <li className="flex items-start gap-3 text-foreground/80">
+                <Mail className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                urbtechsolutions@outlook.com
+              </li>
+              <li className="flex items-start gap-3 text-foreground/80">
+                <MapPin className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                Nationwide service across the US
+              </li>
+            </ul>
+            <a
+              href="#contact"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 font-cond text-xs uppercase tracking-widest text-primary-foreground transition-transform hover:scale-105"
+            >
+              Request Callback <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
-        <div className="text-muted-foreground italic text-xs">
-          Built for businesses. Free forever.
+
+        <div className="mt-14 pt-6 border-t border-hairline flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="text-muted-foreground font-cond uppercase tracking-widest text-xs">
+            © {new Date().getFullYear()} URBTECH. All rights reserved.
+          </div>
+          <div className="flex gap-6 text-xs text-muted-foreground">
+            <a href="#" className="hover:text-primary transition-colors">Privacy</a>
+            <a href="#" className="hover:text-primary transition-colors">Terms</a>
+            <a href="#" className="hover:text-primary transition-colors">Cookies</a>
+          </div>
         </div>
       </div>
     </footer>
@@ -640,6 +797,7 @@ function Index() {
         <Terminals />
         <AboutUs />
         <Testimonials />
+        <Marquee />
         <Contact />
       </main>
       <Footer />
