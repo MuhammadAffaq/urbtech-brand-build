@@ -281,7 +281,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="relative py-28 bg-[#0f0f0f]">
+    <section id="about" className="relative py-28 bg-surface">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="reveal">
@@ -349,7 +349,7 @@ const SERVICES = [
 
 function Services() {
   return (
-    <section id="services" className="relative py-28 bg-[#111111]">
+    <section id="services" className="relative py-28 bg-surface-2">
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="reveal max-w-2xl">
@@ -391,7 +391,7 @@ const TERMINAL_FEATURES = [
 
 function Terminals() {
   return (
-    <section id="terminals" className="relative py-28 bg-[#0f0f0f]">
+    <section id="terminals" className="relative py-28 bg-surface">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-[1.1fr_1fr] gap-16">
           <div>
@@ -477,7 +477,7 @@ const HIGHLIGHTS = [
 
 function AboutUs() {
   return (
-    <section className="relative py-28 bg-[#111111]">
+    <section className="relative py-28 bg-surface-2">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="reveal">
@@ -542,7 +542,7 @@ const TESTIMONIALS = [
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-28 bg-[#0f0f0f]">
+    <section id="testimonials" className="relative py-28 bg-surface">
       <div className="absolute inset-0 grid-bg opacity-30" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="reveal max-w-2xl">
@@ -572,7 +572,7 @@ function Testimonials() {
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
   return (
-    <section id="contact" className="relative py-28 bg-[#111111] overflow-hidden">
+    <section id="contact" className="relative py-28 bg-surface-2 overflow-hidden">
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[600px] w-[900px] red-glow pointer-events-none" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-2 gap-16">
@@ -591,7 +591,6 @@ function Contact() {
               {[
                 { icon: Phone, label: "Call Us", value: "(405) 210-6451" },
                 { icon: Mail, label: "Email", value: "urbtechsolutions@outlook.com" },
-                { icon: Globe, label: "Website", value: "www.urbtechatms.com" },
               ].map((c) => (
                 <div
                   key={c.label}
