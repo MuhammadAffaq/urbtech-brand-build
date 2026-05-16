@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
+import urbtechLogo from "@/assets/urbtech-logo.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -117,8 +118,12 @@ function useReveal() {
 
 function Logo() {
   return (
-    <a href="#hero" className="font-display text-2xl tracking-wider">
-      URB<span className="text-primary">TECH</span>
+    <a href="#hero" className="inline-flex items-center" aria-label="URBTECH home">
+      <img
+        src={urbtechLogo}
+        alt="URBTECH"
+        className="h-9 w-auto md:h-10 object-contain dark:invert-0 [.light_&]:invert-0"
+      />
     </a>
   );
 }
@@ -540,28 +545,76 @@ const TESTIMONIALS = [
 ];
 
 function Testimonials() {
+  const [index, setIndex] = useState(0);
+  const total = TESTIMONIALS.length;
+  useEffect(() => {
+    const id = setInterval(() => setIndex((i) => (i + 1) % total), 6000);
+    return () => clearInterval(id);
+  }, [total]);
+  const prev = () => setIndex((i) => (i - 1 + total) % total);
+  const next = () => setIndex((i) => (i + 1) % total);
   return (
     <section id="testimonials" className="relative py-28 bg-surface">
       <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="reveal max-w-2xl">
+      <div className="relative mx-auto max-w-5xl px-6">
+        <div className="reveal text-center">
           <SectionLabel>Testimonials</SectionLabel>
           <h2 className="font-display text-5xl md:text-6xl leading-tight">
             What Our <span className="text-primary">Clients Say</span>
           </h2>
         </div>
-        <div className="mt-16 grid md:grid-cols-2 gap-6">
-          {TESTIMONIALS.map((t) => (
-            <div key={t.name} className="reveal glass glass-hover rounded-2xl p-8">
-              <Quote className="h-10 w-10 text-primary mb-4" />
-              <p className="italic text-lg leading-relaxed text-foreground/90">
-                "{t.quote}"
-              </p>
-              <div className="mt-6 font-cond text-sm uppercase tracking-[0.25em] text-muted-foreground">
-                — {t.name}
-              </div>
+
+        <div className="reveal relative mt-16">
+          <Quote className="absolute -top-6 left-1/2 -translate-x-1/2 h-16 w-16 text-primary/15" />
+          <div className="relative overflow-hidden rounded-3xl glass px-6 py-14 md:px-16 md:py-20">
+            <div
+              className="flex transition-transform duration-700 ease-out"
+              style={{ transform: `translateX(-${index * 100}%)` }}
+            >
+              {TESTIMONIALS.map((t) => (
+                <div key={t.name} className="w-full shrink-0 px-2 md:px-8 text-center">
+                  <p className="font-display text-2xl md:text-4xl leading-snug tracking-wide text-foreground/95">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="mt-10 flex flex-col items-center gap-3">
+                    <span className="h-px w-10 bg-primary" />
+                    <div className="font-cond text-sm uppercase tracking-[0.32em] text-primary">
+                      {t.name}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className="mt-10 flex items-center justify-center gap-6">
+            <button
+              onClick={prev}
+              aria-label="Previous testimonial"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary transition-all hover:-translate-x-0.5"
+            >
+              <ArrowRight className="h-4 w-4 rotate-180" />
+            </button>
+            <div className="flex items-center gap-2">
+              {TESTIMONIALS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIndex(i)}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all ${
+                    i === index ? "w-8 bg-primary" : "w-2 bg-foreground/20 hover:bg-foreground/40"
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={next}
+              aria-label="Next testimonial"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary transition-all hover:translate-x-0.5"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
