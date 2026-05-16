@@ -295,48 +295,115 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="relative py-28 bg-surface">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="reveal">
+    <section id="about" className="relative py-28 md:py-36 bg-surface overflow-hidden">
+      {/* Decorative blueprint marks */}
+      <div className="absolute inset-0 grid-bg opacity-[0.25] pointer-events-none" />
+      <div className="absolute -left-32 top-1/3 h-[420px] w-[420px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Top eyebrow row */}
+        <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+          <div className="max-w-2xl">
             <SectionLabel>What We Do</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl leading-tight">
-              Cash Solutions For
+            <h2 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight">
+              Cash solutions,
               <br />
-              <span className="text-primary">Every Business</span>
+              <span className="text-gradient">engineered end&#8209;to&#8209;end.</span>
             </h2>
-            <div className="mt-8 space-y-5 text-muted-foreground leading-relaxed">
-              <p>
-                URBTECH supplies businesses across the country with fully managed ATM
-                machines — installed, stocked, and serviced at zero cost to you. Your
-                location earns passive income on every transaction while we handle
-                everything behind the scenes.
-              </p>
-              <p>
-                From compliance and cash loading to maintenance and 24/7 monitoring,
-                we operate the entire ATM lifecycle. You get a new revenue stream and
-                more foot traffic. We get a long-term partner.
-              </p>
+          </div>
+          <p className="md:max-w-sm text-muted-foreground leading-relaxed md:text-right">
+            We install, stock, monitor and service every ATM in our network — so your
+            location earns passive income without lifting a finger.
+          </p>
+        </div>
+
+        {/* Asymmetric content grid */}
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          {/* Big visual card */}
+          <div className="reveal lg:col-span-7 relative">
+            <div className="absolute -inset-6 red-glow blur-3xl opacity-60 pointer-events-none" />
+            <div className="glass relative rounded-3xl p-8 md:p-12 h-full overflow-hidden">
+              {/* Corner marks */}
+              <span className="absolute top-4 left-4 h-3 w-3 border-l border-t border-primary" />
+              <span className="absolute top-4 right-4 h-3 w-3 border-r border-t border-primary" />
+              <span className="absolute bottom-4 left-4 h-3 w-3 border-l border-b border-primary" />
+              <span className="absolute bottom-4 right-4 h-3 w-3 border-r border-b border-primary" />
+
+              <div className="grid grid-cols-2 gap-8 items-center">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1 text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    Live network
+                  </div>
+                  <div>
+                    <div className="font-display text-6xl md:text-7xl text-primary leading-none">
+                      24/7
+                    </div>
+                    <div className="mt-2 text-sm text-muted-foreground">
+                      Monitoring, cash loading & compliance handled by our team.
+                    </div>
+                  </div>
+                  <div className="h-px bg-hairline border-hairline border-t" />
+                  <div className="flex items-center gap-3">
+                    <Sparkles className="h-4 w-4 text-primary" />
+                    <span className="font-cond text-xs uppercase tracking-[0.28em] text-foreground/70">
+                      Zero-cost installation
+                    </span>
+                  </div>
+                </div>
+                <div className="relative animate-float">
+                  <div className="absolute inset-0 rounded-full bg-primary/15 blur-2xl" />
+                  <img
+                    src={atmHero}
+                    alt="URBTECH ATM"
+                    width={1024}
+                    height={1280}
+                    loading="lazy"
+                    className="relative w-full max-w-[260px] mx-auto drop-shadow-[0_30px_50px_rgba(224,26,43,0.35)]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          <div className="relative reveal">
-            <div className="absolute -inset-10 red-glow blur-3xl opacity-70" />
-            <div className="glass relative rounded-3xl p-8 md:p-12 flex items-center justify-center">
-              <img
-                src={atmHero}
-                alt="ATM"
-                width={1024}
-                height={1280}
-                loading="lazy"
-                className="w-full max-w-xs"
-              />
-            </div>
+
+          {/* Right column: stat tiles */}
+          <div className="lg:col-span-5 grid sm:grid-cols-2 gap-6">
+            {ABOUT_TILES.map((t) => (
+              <div
+                key={t.title}
+                className="reveal glass glass-hover rounded-2xl p-6 flex flex-col justify-between min-h-[180px]"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <t.icon className="h-5 w-5" />
+                  </div>
+                  <span className="font-cond text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                    {t.tag}
+                  </span>
+                </div>
+                <div className="mt-6">
+                  <div className="font-display text-3xl md:text-4xl text-foreground leading-none">
+                    {t.stat}
+                  </div>
+                  <div className="mt-2 text-sm text-muted-foreground leading-snug">
+                    {t.title}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+const ABOUT_TILES = [
+  { icon: Building2, tag: "Reach", stat: "Nationwide", title: "Coverage across every major U.S. metro." },
+  { icon: CircleDollarSign, tag: "Earn", stat: "Passive", title: "Monthly revenue share on every transaction." },
+  { icon: ShieldCheck, tag: "Secure", stat: "Insured", title: "Every machine fully covered — risk on us." },
+  { icon: Headphones, tag: "Support", stat: "24/7", title: "Live technicians and remote diagnostics." },
+];
 
 const SERVICES = [
   {
