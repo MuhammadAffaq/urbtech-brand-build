@@ -24,6 +24,10 @@ import {
   Instagram,
   Linkedin,
   Twitter,
+  Star,
+  Building2,
+  Headphones,
+  CircleDollarSign,
 } from "lucide-react";
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
