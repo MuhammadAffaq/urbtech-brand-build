@@ -601,21 +601,25 @@ function AboutUs() {
 const TESTIMONIALS = [
   {
     name: "Archie Gomez",
+    role: "Owner, Corner Mart",
     quote:
       "URBTECH put an ATM in our shop with zero hassle. The extra foot traffic alone has been worth it, and the monthly checks are a bonus.",
   },
   {
     name: "Bhaumik Rao",
+    role: "GM, City Liquors",
     quote:
       "We've worked with other ATM companies before and the difference is night and day. Service is fast, the team is responsive, and the equipment is rock solid.",
   },
   {
     name: "Andy Sterling",
+    role: "Founder, Sterling Cafe",
     quote:
       "Adding the cashless terminal was the best decision we made this year. Setup was painless and our customers love the flexibility.",
   },
   {
     name: "Gumed Torres",
+    role: "Operator, Torres Bodega",
     quote:
       "From day one URBTECH felt like a true partner. They handle everything — we just collect our share and watch sales climb.",
   },
@@ -630,33 +634,75 @@ function Testimonials() {
   }, [total]);
   const prev = () => setIndex((i) => (i - 1 + total) % total);
   const next = () => setIndex((i) => (i + 1) % total);
+  const initials = (n: string) =>
+    n.split(" ").map((s) => s[0]).slice(0, 2).join("");
   return (
-    <section id="testimonials" className="relative py-28 bg-surface">
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="relative mx-auto max-w-5xl px-6">
-        <div className="reveal text-center">
-          <SectionLabel>Testimonials</SectionLabel>
-          <h2 className="font-display text-5xl md:text-6xl leading-tight">
-            What Our <span className="text-primary">Clients Say</span>
-          </h2>
+    <section id="testimonials" className="relative py-28 md:py-36 bg-surface overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-[0.2] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[800px] red-glow opacity-50 pointer-events-none" />
+
+      <div className="relative mx-auto max-w-6xl px-6">
+        {/* Header row */}
+        <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+          <div>
+            <SectionLabel>Testimonials</SectionLabel>
+            <h2 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight">
+              Trusted by
+              <br />
+              <span className="text-gradient">operators nationwide.</span>
+            </h2>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+              ))}
+            </div>
+            <div className="text-xs font-cond uppercase tracking-[0.3em] text-muted-foreground">
+              4.9 / 5 · 200+ partners
+            </div>
+          </div>
         </div>
 
-        <div className="reveal relative mt-16">
-          <Quote className="absolute -top-6 left-1/2 -translate-x-1/2 h-16 w-16 text-primary/15" />
-          <div className="relative overflow-hidden rounded-3xl glass px-6 py-14 md:px-16 md:py-20">
+        {/* Slider card */}
+        <div className="reveal relative">
+          {/* Floating quote glyph */}
+          <div className="absolute -top-10 -left-2 md:-left-6 font-display text-[140px] md:text-[200px] leading-none text-primary/10 select-none pointer-events-none">
+            &ldquo;
+          </div>
+
+          <div className="relative overflow-hidden rounded-3xl glass">
+            {/* gradient top hairline */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
             <div
               className="flex transition-transform duration-700 ease-out"
               style={{ transform: `translateX(-${index * 100}%)` }}
             >
               {TESTIMONIALS.map((t) => (
-                <div key={t.name} className="w-full shrink-0 px-2 md:px-8 text-center">
-                  <p className="font-display text-2xl md:text-4xl leading-snug tracking-wide text-foreground/95">
-                    &ldquo;{t.quote}&rdquo;
+                <div
+                  key={t.name}
+                  className="w-full shrink-0 px-8 py-14 md:px-20 md:py-20"
+                >
+                  <div className="flex items-center gap-1 mb-8">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="font-display text-2xl md:text-4xl leading-[1.25] tracking-wide text-foreground/95 max-w-3xl">
+                    {t.quote}
                   </p>
-                  <div className="mt-10 flex flex-col items-center gap-3">
-                    <span className="h-px w-10 bg-primary" />
-                    <div className="font-cond text-sm uppercase tracking-[0.32em] text-primary">
-                      {t.name}
+                  <div className="mt-12 flex items-center gap-4">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/15 border border-primary/30 font-display text-lg text-primary">
+                      {initials(t.name)}
+                    </div>
+                    <div>
+                      <div className="font-display text-lg tracking-wide text-foreground">
+                        {t.name}
+                      </div>
+                      <div className="font-cond text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+                        {t.role}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -664,33 +710,46 @@ function Testimonials() {
             </div>
           </div>
 
-          <div className="mt-10 flex items-center justify-center gap-6">
-            <button
-              onClick={prev}
-              aria-label="Previous testimonial"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary transition-all hover:-translate-x-0.5"
-            >
-              <ArrowRight className="h-4 w-4 rotate-180" />
-            </button>
-            <div className="flex items-center gap-2">
+          {/* Controls row */}
+          <div className="mt-8 flex items-center justify-between">
+            {/* progress segments */}
+            <div className="flex items-center gap-2 flex-1 max-w-md">
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setIndex(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === index ? "w-8 bg-primary" : "w-2 bg-foreground/20 hover:bg-foreground/40"
-                  }`}
-                />
+                  className="group relative h-[2px] flex-1 overflow-hidden bg-foreground/10"
+                >
+                  <span
+                    className={`absolute inset-y-0 left-0 bg-primary transition-all duration-500 ${
+                      i < index ? "w-full" : i === index ? "w-full" : "w-0"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
-            <button
-              onClick={next}
-              aria-label="Next testimonial"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary transition-all hover:translate-x-0.5"
-            >
-              <ArrowRight className="h-4 w-4" />
-            </button>
+
+            <div className="flex items-center gap-3 ml-6">
+              <span className="font-cond text-xs uppercase tracking-[0.3em] text-muted-foreground tabular-nums">
+                {String(index + 1).padStart(2, "0")}
+                <span className="text-foreground/30"> / {String(total).padStart(2, "0")}</span>
+              </span>
+              <button
+                onClick={prev}
+                aria-label="Previous testimonial"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary hover:bg-primary/10 transition-all"
+              >
+                <ArrowRight className="h-4 w-4 rotate-180" />
+              </button>
+              <button
+                onClick={next}
+                aria-label="Next testimonial"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-primary bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
