@@ -76,10 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "URBTECH installs, manages, and maintains ATMs at your business — entirely free. Earn passive income on every transaction." },
       { name: "author", content: "URBTECH" },
       { property: "og:title", content: "URBTECH — Free ATM Placements & Cashless Terminals" },
-      { property: "og:description", content: "Free ATM placements and cashless payment terminals for your business. Trusted since 2018." },
+      { property: "og:description", content: "URBTECH installs, manages, and maintains ATMs at your business — entirely free. Earn passive income on every transaction." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "URBTECH — Free ATM Placements & Cashless Terminals" },
+      { name: "twitter:description", content: "URBTECH installs, manages, and maintains ATMs at your business — entirely free. Earn passive income on every transaction." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/44e9c737-b38d-412f-8090-67206076fd76" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/44e9c737-b38d-412f-8090-67206076fd76" },
     ],
     links: [
       {
