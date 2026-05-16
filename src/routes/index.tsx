@@ -24,6 +24,10 @@ import {
   Instagram,
   Linkedin,
   Twitter,
+  Star,
+  Building2,
+  Headphones,
+  CircleDollarSign,
 } from "lucide-react";
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
@@ -291,48 +295,115 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" className="relative py-28 bg-surface">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="reveal">
+    <section id="about" className="relative py-28 md:py-36 bg-surface overflow-hidden">
+      {/* Decorative blueprint marks */}
+      <div className="absolute inset-0 grid-bg opacity-[0.25] pointer-events-none" />
+      <div className="absolute -left-32 top-1/3 h-[420px] w-[420px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* Top eyebrow row */}
+        <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+          <div className="max-w-2xl">
             <SectionLabel>What We Do</SectionLabel>
-            <h2 className="font-display text-5xl md:text-6xl leading-tight">
-              Cash Solutions For
+            <h2 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight">
+              Cash solutions,
               <br />
-              <span className="text-primary">Every Business</span>
+              <span className="text-gradient">engineered end&#8209;to&#8209;end.</span>
             </h2>
-            <div className="mt-8 space-y-5 text-muted-foreground leading-relaxed">
-              <p>
-                URBTECH supplies businesses across the country with fully managed ATM
-                machines — installed, stocked, and serviced at zero cost to you. Your
-                location earns passive income on every transaction while we handle
-                everything behind the scenes.
-              </p>
-              <p>
-                From compliance and cash loading to maintenance and 24/7 monitoring,
-                we operate the entire ATM lifecycle. You get a new revenue stream and
-                more foot traffic. We get a long-term partner.
-              </p>
+          </div>
+          <p className="md:max-w-sm text-muted-foreground leading-relaxed md:text-right">
+            We install, stock, monitor and service every ATM in our network — so your
+            location earns passive income without lifting a finger.
+          </p>
+        </div>
+
+        {/* Asymmetric content grid */}
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+          {/* Big visual card */}
+          <div className="reveal lg:col-span-7 relative">
+            <div className="absolute -inset-6 red-glow blur-3xl opacity-60 pointer-events-none" />
+            <div className="glass relative rounded-3xl p-8 md:p-12 h-full overflow-hidden">
+              {/* Corner marks */}
+              <span className="absolute top-4 left-4 h-3 w-3 border-l border-t border-primary" />
+              <span className="absolute top-4 right-4 h-3 w-3 border-r border-t border-primary" />
+              <span className="absolute bottom-4 left-4 h-3 w-3 border-l border-b border-primary" />
+              <span className="absolute bottom-4 right-4 h-3 w-3 border-r border-b border-primary" />
+
+              <div className="grid grid-cols-2 gap-8 items-center">
+                <div className="space-y-6">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1 text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                    <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                    Live network
+                  </div>
+                  <div>
+                    <div className="font-display text-6xl md:text-7xl text-primary leading-none">
+                      24/7
+                    </div>
+                    <div className="mt-2 text-sm text-muted-foreground">
+                      Monitoring, cash loading & compliance handled by our team.
+                    </div>
+                  </div>
+                  <div className="h-px bg-hairline border-hairline border-t" />
+                  <div className="flex items-center gap-3">
+                    <Sparkles className="h-4 w-4 text-primary" />
+                    <span className="font-cond text-xs uppercase tracking-[0.28em] text-foreground/70">
+                      Zero-cost installation
+                    </span>
+                  </div>
+                </div>
+                <div className="relative animate-float">
+                  <div className="absolute inset-0 rounded-full bg-primary/15 blur-2xl" />
+                  <img
+                    src={atmHero}
+                    alt="URBTECH ATM"
+                    width={1024}
+                    height={1280}
+                    loading="lazy"
+                    className="relative w-full max-w-[260px] mx-auto drop-shadow-[0_30px_50px_rgba(224,26,43,0.35)]"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          <div className="relative reveal">
-            <div className="absolute -inset-10 red-glow blur-3xl opacity-70" />
-            <div className="glass relative rounded-3xl p-8 md:p-12 flex items-center justify-center">
-              <img
-                src={atmHero}
-                alt="ATM"
-                width={1024}
-                height={1280}
-                loading="lazy"
-                className="w-full max-w-xs"
-              />
-            </div>
+
+          {/* Right column: stat tiles */}
+          <div className="lg:col-span-5 grid sm:grid-cols-2 gap-6">
+            {ABOUT_TILES.map((t) => (
+              <div
+                key={t.title}
+                className="reveal glass glass-hover rounded-2xl p-6 flex flex-col justify-between min-h-[180px]"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
+                    <t.icon className="h-5 w-5" />
+                  </div>
+                  <span className="font-cond text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                    {t.tag}
+                  </span>
+                </div>
+                <div className="mt-6">
+                  <div className="font-display text-3xl md:text-4xl text-foreground leading-none">
+                    {t.stat}
+                  </div>
+                  <div className="mt-2 text-sm text-muted-foreground leading-snug">
+                    {t.title}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+const ABOUT_TILES = [
+  { icon: Building2, tag: "Reach", stat: "Nationwide", title: "Coverage across every major U.S. metro." },
+  { icon: CircleDollarSign, tag: "Earn", stat: "Passive", title: "Monthly revenue share on every transaction." },
+  { icon: ShieldCheck, tag: "Secure", stat: "Insured", title: "Every machine fully covered — risk on us." },
+  { icon: Headphones, tag: "Support", stat: "24/7", title: "Live technicians and remote diagnostics." },
+];
 
 const SERVICES = [
   {
@@ -530,21 +601,25 @@ function AboutUs() {
 const TESTIMONIALS = [
   {
     name: "Archie Gomez",
+    role: "Owner, Corner Mart",
     quote:
       "URBTECH put an ATM in our shop with zero hassle. The extra foot traffic alone has been worth it, and the monthly checks are a bonus.",
   },
   {
     name: "Bhaumik Rao",
+    role: "GM, City Liquors",
     quote:
       "We've worked with other ATM companies before and the difference is night and day. Service is fast, the team is responsive, and the equipment is rock solid.",
   },
   {
     name: "Andy Sterling",
+    role: "Founder, Sterling Cafe",
     quote:
       "Adding the cashless terminal was the best decision we made this year. Setup was painless and our customers love the flexibility.",
   },
   {
     name: "Gumed Torres",
+    role: "Operator, Torres Bodega",
     quote:
       "From day one URBTECH felt like a true partner. They handle everything — we just collect our share and watch sales climb.",
   },
@@ -559,33 +634,75 @@ function Testimonials() {
   }, [total]);
   const prev = () => setIndex((i) => (i - 1 + total) % total);
   const next = () => setIndex((i) => (i + 1) % total);
+  const initials = (n: string) =>
+    n.split(" ").map((s) => s[0]).slice(0, 2).join("");
   return (
-    <section id="testimonials" className="relative py-28 bg-surface">
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="relative mx-auto max-w-5xl px-6">
-        <div className="reveal text-center">
-          <SectionLabel>Testimonials</SectionLabel>
-          <h2 className="font-display text-5xl md:text-6xl leading-tight">
-            What Our <span className="text-primary">Clients Say</span>
-          </h2>
+    <section id="testimonials" className="relative py-28 md:py-36 bg-surface overflow-hidden">
+      <div className="absolute inset-0 grid-bg opacity-[0.2] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[800px] red-glow opacity-50 pointer-events-none" />
+
+      <div className="relative mx-auto max-w-6xl px-6">
+        {/* Header row */}
+        <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+          <div>
+            <SectionLabel>Testimonials</SectionLabel>
+            <h2 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight">
+              Trusted by
+              <br />
+              <span className="text-gradient">operators nationwide.</span>
+            </h2>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+              ))}
+            </div>
+            <div className="text-xs font-cond uppercase tracking-[0.3em] text-muted-foreground">
+              4.9 / 5 · 200+ partners
+            </div>
+          </div>
         </div>
 
-        <div className="reveal relative mt-16">
-          <Quote className="absolute -top-6 left-1/2 -translate-x-1/2 h-16 w-16 text-primary/15" />
-          <div className="relative overflow-hidden rounded-3xl glass px-6 py-14 md:px-16 md:py-20">
+        {/* Slider card */}
+        <div className="reveal relative">
+          {/* Floating quote glyph */}
+          <div className="absolute -top-10 -left-2 md:-left-6 font-display text-[140px] md:text-[200px] leading-none text-primary/10 select-none pointer-events-none">
+            &ldquo;
+          </div>
+
+          <div className="relative overflow-hidden rounded-3xl glass">
+            {/* gradient top hairline */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
             <div
               className="flex transition-transform duration-700 ease-out"
               style={{ transform: `translateX(-${index * 100}%)` }}
             >
               {TESTIMONIALS.map((t) => (
-                <div key={t.name} className="w-full shrink-0 px-2 md:px-8 text-center">
-                  <p className="font-display text-2xl md:text-4xl leading-snug tracking-wide text-foreground/95">
-                    &ldquo;{t.quote}&rdquo;
+                <div
+                  key={t.name}
+                  className="w-full shrink-0 px-8 py-14 md:px-20 md:py-20"
+                >
+                  <div className="flex items-center gap-1 mb-8">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="font-display text-2xl md:text-4xl leading-[1.25] tracking-wide text-foreground/95 max-w-3xl">
+                    {t.quote}
                   </p>
-                  <div className="mt-10 flex flex-col items-center gap-3">
-                    <span className="h-px w-10 bg-primary" />
-                    <div className="font-cond text-sm uppercase tracking-[0.32em] text-primary">
-                      {t.name}
+                  <div className="mt-12 flex items-center gap-4">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/15 border border-primary/30 font-display text-lg text-primary">
+                      {initials(t.name)}
+                    </div>
+                    <div>
+                      <div className="font-display text-lg tracking-wide text-foreground">
+                        {t.name}
+                      </div>
+                      <div className="font-cond text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+                        {t.role}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -593,33 +710,46 @@ function Testimonials() {
             </div>
           </div>
 
-          <div className="mt-10 flex items-center justify-center gap-6">
-            <button
-              onClick={prev}
-              aria-label="Previous testimonial"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary transition-all hover:-translate-x-0.5"
-            >
-              <ArrowRight className="h-4 w-4 rotate-180" />
-            </button>
-            <div className="flex items-center gap-2">
+          {/* Controls row */}
+          <div className="mt-8 flex items-center justify-between">
+            {/* progress segments */}
+            <div className="flex items-center gap-2 flex-1 max-w-md">
               {TESTIMONIALS.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setIndex(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all ${
-                    i === index ? "w-8 bg-primary" : "w-2 bg-foreground/20 hover:bg-foreground/40"
-                  }`}
-                />
+                  className="group relative h-[2px] flex-1 overflow-hidden bg-foreground/10"
+                >
+                  <span
+                    className={`absolute inset-y-0 left-0 bg-primary transition-all duration-500 ${
+                      i < index ? "w-full" : i === index ? "w-full" : "w-0"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
-            <button
-              onClick={next}
-              aria-label="Next testimonial"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary transition-all hover:translate-x-0.5"
-            >
-              <ArrowRight className="h-4 w-4" />
-            </button>
+
+            <div className="flex items-center gap-3 ml-6">
+              <span className="font-cond text-xs uppercase tracking-[0.3em] text-muted-foreground tabular-nums">
+                {String(index + 1).padStart(2, "0")}
+                <span className="text-foreground/30"> / {String(total).padStart(2, "0")}</span>
+              </span>
+              <button
+                onClick={prev}
+                aria-label="Previous testimonial"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-hairline text-foreground/80 hover:text-primary hover:border-primary hover:bg-primary/10 transition-all"
+              >
+                <ArrowRight className="h-4 w-4 rotate-180" />
+              </button>
+              <button
+                onClick={next}
+                aria-label="Next testimonial"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-primary bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+              >
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
