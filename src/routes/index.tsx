@@ -28,6 +28,7 @@ import {
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
 import urbtechLogo from "@/assets/urbtech-logo.png";
+import urbtechLogoWhite from "@/assets/urbtech-logo-white.png";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -120,9 +121,14 @@ function Logo() {
   return (
     <a href="#hero" className="inline-flex items-center" aria-label="URBTECH home">
       <img
+        src={urbtechLogoWhite}
+        alt="URBTECH"
+        className="h-9 w-auto md:h-10 object-contain block [.light_&]:hidden"
+      />
+      <img
         src={urbtechLogo}
         alt="URBTECH"
-        className="h-9 w-auto md:h-10 object-contain dark:invert-0 [.light_&]:invert-0"
+        className="h-9 w-auto md:h-10 object-contain hidden [.light_&]:block"
       />
     </a>
   );
