@@ -547,6 +547,13 @@ function Terminals() {
                 >
                   Request Terminal <ArrowRight className="h-4 w-4" />
                 </a>
+                <a
+                  href="/urbtech-terminal-brochure.pdf"
+                  download="URBTECH-Terminal-Brochure.pdf"
+                  className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-6 py-3 font-cond text-sm uppercase tracking-widest text-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02]"
+                >
+                  <Download className="h-4 w-4" /> Download Brochure
+                </a>
               </div>
             </div>
           </div>
