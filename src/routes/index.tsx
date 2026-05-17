@@ -20,10 +20,6 @@ import {
   Moon,
   MapPin,
   Sparkles,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
   Star,
   Building2,
   Headphones,
@@ -277,7 +273,7 @@ function Hero() {
               <Stat value="2018" label="Established" />
             </div>
           </div>
-          <div className="relative reveal hidden lg:block">
+          <div className="relative reveal mt-10 lg:mt-0">
             <div className="absolute inset-0 red-glow blur-2xl" />
             <img
               src={atmHero}
@@ -887,18 +883,7 @@ function Footer() {
               Free ATM placements & cashless payment terminals for ambitious businesses.
               Trusted by partners nationwide since 2018.
             </p>
-            <div className="mt-6 flex gap-3">
-              {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  aria-label="Social link"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-foreground/70 hover:text-primary hover:border-primary hover:-translate-y-0.5 transition-all"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
+
           </div>
 
           <div>
