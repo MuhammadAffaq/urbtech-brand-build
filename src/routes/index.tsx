@@ -24,6 +24,7 @@ import {
   Building2,
   Headphones,
   CircleDollarSign,
+  Download,
 } from "lucide-react";
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
