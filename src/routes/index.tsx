@@ -24,6 +24,7 @@ import {
   Building2,
   Headphones,
   CircleDollarSign,
+  Download,
 } from "lucide-react";
 import atmHero from "@/assets/atm-hero.png";
 import terminalImg from "@/assets/terminal.png";
@@ -307,10 +308,20 @@ function About() {
               <span className="text-gradient">engineered end&#8209;to&#8209;end.</span>
             </h2>
           </div>
-          <p className="md:max-w-sm text-muted-foreground leading-relaxed md:text-right">
-            We install, stock, monitor and service every ATM in our network — so your
-            location earns passive income without lifting a finger.
-          </p>
+          <div className="md:max-w-sm md:text-right space-y-5">
+            <p className="text-muted-foreground leading-relaxed">
+              We install, stock, monitor and service every ATM in our network — so your
+              location earns passive income without lifting a finger.
+            </p>
+            <a
+              href="/urbtech-brochure.pdf"
+              download="URBTECH-Brochure.pdf"
+              className="group inline-flex items-center gap-3 rounded-full border border-primary/40 bg-primary/10 px-5 py-3 text-xs font-cond uppercase tracking-[0.28em] text-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] hover:shadow-[0_10px_30px_-10px_rgba(224,26,43,0.6)]"
+            >
+              <Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+              Download Brochure
+            </a>
+          </div>
         </div>
 
         {/* Asymmetric content grid */}
