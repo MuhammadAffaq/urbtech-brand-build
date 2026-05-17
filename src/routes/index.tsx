@@ -887,18 +887,7 @@ function Footer() {
               Free ATM placements & cashless payment terminals for ambitious businesses.
               Trusted by partners nationwide since 2018.
             </p>
-            <div className="mt-6 flex gap-3">
-              {[Facebook, Instagram, Twitter, Linkedin].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  aria-label="Social link"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-foreground/70 hover:text-primary hover:border-primary hover:-translate-y-0.5 transition-all"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
+
           </div>
 
           <div>
