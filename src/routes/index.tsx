@@ -277,7 +277,7 @@ function Hero() {
               <Stat value="2018" label="Established" />
             </div>
           </div>
-          <div className="relative reveal hidden lg:block">
+          <div className="relative reveal mt-10 lg:mt-0">
             <div className="absolute inset-0 red-glow blur-2xl" />
             <img
               src={atmHero}
