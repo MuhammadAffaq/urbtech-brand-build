@@ -314,8 +314,8 @@ function About() {
               location earns passive income without lifting a finger.
             </p>
             <a
-              href="/brochure.pdf"
-              download="URBTECH-Brochure.pdf"
+              href="/atm-brochure.pdf"
+              download="URBTECH-ATM-Brochure.pdf"
               className="group inline-flex items-center gap-3 rounded-full border border-primary/40 bg-primary/10 px-5 py-3 text-xs font-cond uppercase tracking-[0.28em] text-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] hover:shadow-[0_10px_30px_-10px_rgba(224,26,43,0.6)]"
             >
               <Download className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
