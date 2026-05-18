@@ -314,7 +314,7 @@ function About() {
               location earns passive income without lifting a finger.
             </p>
             <a
-              href="/urbtech-brochure.pdf"
+              href="/brochure.pdf"
               download="URBTECH-Brochure.pdf"
               className="group inline-flex items-center gap-3 rounded-full border border-primary/40 bg-primary/10 px-5 py-3 text-xs font-cond uppercase tracking-[0.28em] text-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] hover:shadow-[0_10px_30px_-10px_rgba(224,26,43,0.6)]"
             >
@@ -548,7 +548,7 @@ function Terminals() {
                   Request Terminal <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
-                  href="/urbtech-terminal-brochure.pdf"
+                  href="/brochure.pdf"
                   download="URBTECH-Terminal-Brochure.pdf"
                   className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-6 py-3 font-cond text-sm uppercase tracking-widest text-foreground transition-all hover:bg-primary hover:text-primary-foreground hover:scale-[1.02]"
                 >
