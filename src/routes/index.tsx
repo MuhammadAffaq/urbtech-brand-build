@@ -863,26 +863,38 @@ function Contact() {
   );
 }
 
-const MARQUEE = [
-  "Free Installation",
-  "Zero Cost",
-  "Earn Per Transaction",
-  "Nationwide Coverage",
-  "Trusted Since 2018",
-  "24/7 Monitoring",
-  "Local Technicians",
-  "Cashless Terminals",
+import partnerSkull from "@/assets/partners/skull.png";
+import partnerCookies from "@/assets/partners/cookies.png";
+import partnerDispensary from "@/assets/partners/dispensary-near-me.png";
+import partnerGasquatch from "@/assets/partners/gasquatch.png";
+import partnerMunchiez from "@/assets/partners/munchiez.png";
+import partnerLove from "@/assets/partners/love-cannabis.png";
+import partnerMango from "@/assets/partners/mango.png";
+
+const PARTNERS = [
+  { src: partnerCookies, alt: "Cookies" },
+  { src: partnerGasquatch, alt: "Gasquatch" },
+  { src: partnerMango, alt: "Mango Cannabis" },
+  { src: partnerMunchiez, alt: "Munchiez Cannabis" },
+  { src: partnerLove, alt: "Love Cannabis Dispensary" },
+  { src: partnerDispensary, alt: "Dispensary Near Me" },
+  { src: partnerSkull, alt: "Partner" },
 ];
 
 function Marquee() {
   return (
-    <div className="relative border-y border-hairline bg-background overflow-hidden py-6">
-      <div className="flex w-max animate-marquee gap-12 whitespace-nowrap">
-        {[...MARQUEE, ...MARQUEE].map((m, i) => (
-          <div key={i} className="flex items-center gap-12">
-            <Sparkles className="h-5 w-5 text-primary" />
-            <span className="font-display text-2xl tracking-wider text-foreground/80">{m}</span>
-          </div>
+    <div className="relative border-y border-hairline bg-background overflow-hidden py-10">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+      <div className="flex w-max animate-marquee items-center gap-20">
+        {[...PARTNERS, ...PARTNERS].map((p, i) => (
+          <img
+            key={i}
+            src={p.src}
+            alt={p.alt}
+            className="h-14 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+            loading="lazy"
+          />
         ))}
       </div>
     </div>
