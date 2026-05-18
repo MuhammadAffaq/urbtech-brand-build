@@ -896,15 +896,19 @@ function Marquee() {
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
-        <div className="flex w-max animate-marquee items-center gap-20">
+        <div className="flex w-max animate-marquee items-center gap-16">
           {[...PARTNERS, ...PARTNERS].map((p, i) => (
-            <img
+            <div
               key={i}
-              src={p.src}
-              alt={p.alt}
-              className="h-14 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-              loading="lazy"
-            />
+              className="flex items-center justify-center h-24 w-40 md:h-28 md:w-48 shrink-0"
+            >
+              <img
+                src={p.src}
+                alt={p.alt}
+                className="max-h-full max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity"
+                loading="lazy"
+              />
+            </div>
           ))}
         </div>
       </div>
