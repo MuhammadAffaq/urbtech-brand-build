@@ -791,7 +791,7 @@ function Contact() {
             </p>
             <div className="mt-10 space-y-4">
               {[
-                { icon: Phone, label: "Call Us", value: "(405) 210-6451" },
+                { icon: Phone, label: "Call Us", value: "(612) 207-2239" },
                 { icon: Mail, label: "Email", value: "urbtechsolutions@outlook.com" },
               ].map((c) => (
                 <div
@@ -954,7 +954,7 @@ function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3 text-foreground/80">
                 <Phone className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                (405) 210-6451
+                (612) 207-2239
               </li>
               <li className="flex items-start gap-3 text-foreground/80">
                 <Mail className="h-4 w-4 text-primary mt-0.5 shrink-0" />
