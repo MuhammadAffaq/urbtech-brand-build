@@ -883,21 +883,32 @@ const PARTNERS = [
 
 function Marquee() {
   return (
-    <div className="relative border-y border-hairline bg-background overflow-hidden py-10">
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
-      <div className="flex w-max animate-marquee items-center gap-20">
-        {[...PARTNERS, ...PARTNERS].map((p, i) => (
-          <img
-            key={i}
-            src={p.src}
-            alt={p.alt}
-            className="h-14 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-            loading="lazy"
-          />
-        ))}
+    <section className="relative border-y border-hairline bg-background overflow-hidden py-16 md:py-20">
+      <div className="mx-auto max-w-7xl px-6 text-center mb-10 md:mb-12">
+        <SectionLabel>Our Partners</SectionLabel>
+        <h2 className="mt-4 font-display text-3xl md:text-5xl tracking-tight text-foreground">
+          Trusted by industry leaders
+        </h2>
+        <p className="mt-3 text-sm md:text-base text-muted-foreground max-w-xl mx-auto">
+          Powering payments for brands and dispensaries nationwide.
+        </p>
       </div>
-    </div>
+      <div className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        <div className="flex w-max animate-marquee items-center gap-20">
+          {[...PARTNERS, ...PARTNERS].map((p, i) => (
+            <img
+              key={i}
+              src={p.src}
+              alt={p.alt}
+              className="h-14 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+              loading="lazy"
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
