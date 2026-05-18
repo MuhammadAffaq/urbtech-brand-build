@@ -815,7 +815,21 @@ function Contact() {
             className="reveal glass rounded-3xl p-8 md:p-10"
             onSubmit={(e) => {
               e.preventDefault();
+              const form = e.currentTarget;
+              const fd = new FormData(form);
+              const subject = encodeURIComponent(
+                `New Request from ${fd.get("name") || "Website"}`,
+              );
+              const body = encodeURIComponent(
+                `Name: ${fd.get("name") || ""}\n` +
+                  `Email: ${fd.get("email") || ""}\n` +
+                  `Business: ${fd.get("business") || ""}\n\n` +
+                  `Message:\n${fd.get("message") || ""}`,
+              );
+              window.location.href = `mailto:urbtechsolutions@outlook.com?subject=${subject}&body=${body}`;
               setSubmitted(true);
+              form.reset();
+              setTimeout(() => setSubmitted(false), 4000);
             }}
           >
             <div className="space-y-5">
